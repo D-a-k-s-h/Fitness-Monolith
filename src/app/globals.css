@@ -1,26 +1,153 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  /* ================================
+     FitMonolith Brand Colors
+     ================================ */
+
+  --color-navy-950: #07111f;
+  --color-navy-900: #0b1728;
+  --color-navy-800: #122238;
+  --color-navy-700: #1b304a;
+
+  --color-teal-500: #14b8a6;
+  --color-teal-400: #2dd4bf;
+
+  --color-green-500: #22c55e;
+  --color-green-400: #4ade80;
+
+  /* ================================
+     Neutral Colors
+     ================================ */
+
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-500: #64748b;
+  --color-slate-700: #334155;
+  --color-slate-900: #0f172a;
+
+  --color-primary: #14b8a6;
+  --color-primary-hover: #2dd4bf;
+
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+
+  --color-border: #e2e8f0;
+
+  --color-success: #22c55e;
+}
+
+.activity-form-label label {
+  color: #e2e8f0 !important;
+}
+
+.activity-log-form .ant-input,
+.activity-log-form .ant-input-number,
+.activity-log-form .ant-picker,
+.activity-log-form .ant-select-selector {
+  color: #e2e8f0 !important;
+  background-color: #334155 !important;
+}
+
+.activity-log-form .ant-input::placeholder,
+.activity-log-form .ant-input-number-input::placeholder,
+.activity-log-form .ant-picker-input > input::placeholder {
+  color: #e2e8f0 !important;
+  opacity: 1;
+}
+
+.activity-log-form .ant-input-number-input,
+.activity-log-form .ant-picker-input > input,
+.activity-log-form .ant-select-selection-item,
+.activity-log-form .ant-picker-suffix,
+.activity-log-form .ant-select-suffix {
+  color: #e2e8f0 !important;
+}
+
+.activity-log-form .activity-select .ant-select-selector {
+  background-color: #64748b !important;
+}
+
+.activity-log-form .activity-select .ant-select-selection-placeholder,
+.activity-log-form .activity-select .ant-select-selection-item {
+  color: #e2e8f0 !important;
+  opacity: 1;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #f8fafc;
+    --foreground: #0f172a;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  margin: 0%;
+}
+
+.gradient-border-card {
+  position: relative;
+  border-color: transparent;
+}
+
+.gradient-border-card::before {
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #14b8a6, #2dd4bf, #6366f1);
+  content: "";
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.gradient-border-card:hover::before {
+  opacity: 1;
+}
+
+@theme inline {
+  --animate-meteor-effect: meteor 5s linear infinite;
+
+  @keyframes meteor {
+    0% {
+      transform: rotate(215deg) translateX(0);
+      opacity: 1;
+    }
+    70% {
+      opacity: 1;
+    }
+    100% {
+      transform: rotate(215deg) translateX(-500px);
+      opacity: 0;
+    }
+  }
+}
+
+.CircularProgressbar {
+  /*
+   * This fixes an issue where the CircularProgressbar svg has
+   * 0 width inside a "display: flex" container, and thus not visible.
+   */
+  width: 100%;
+  /*
+   * This fixes a centering issue with CircularProgressbarWithChildren:
+   * https://github.com/kevinsqi/react-circular-progressbar/issues/94
+   */
+  vertical-align: middle;
 }
