@@ -15,13 +15,15 @@ const FeatureSection = () => {
           <p className="font-semibold text-teal-500 text-lg uppercase">
             Features
           </p>
-          <p className="text-5xl md:text-6xl text-white font-extrabold">
-            Everything you need for a <br></br> healthier you.
+          <p className="text-4xl md:text-6xl text-white font-extrabold">
+            Everything you need for a <br className="hidden md:block"></br>{" "}
+            healthier you.
           </p>
           <p className="text-neutral-400">
-            Fit monolith combines powerful tracking, intelligent <br></br>{" "}
-            insights, and personalized guidance to help you <br></br> reach your
-            goal.
+            Fit monolith combines powerful tracking, intelligent{" "}
+            <br className="hidden md:block"></br> insights, and personalized
+            guidance to help you <br className="hidden md:block"></br> reach
+            your goal.
           </p>
           <button className="cursor-pointer shadow-[0_0_0_3px_#000000_inset] px-8 py-3 bg-transparent outline-2 outline-teal-500 text-teal-300 rounded-full font-bold transform hover:-translate-y-1 transition duration-400">
             Learn more <FastForwardFilled color="#01344a" />

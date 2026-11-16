@@ -31,7 +31,7 @@ const HomeSection = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <section className="w-full relative lg:h-183 grid" id="home">
+    <section className="w-full relative h-110 md:h-130 lg:h-183 grid" id="home">
       <Image
         src="/bg_first_section.png"
         alt="first section bg"
@@ -65,8 +65,8 @@ const HomeSection = () => {
       </div>
 
       {/* HOME CONTENT */}
-      <div className="relative flex flex-row justify-between items-start m-10 lg:m-25">
-        <div className="w-full text-center lg:text-left flex flex-col gap-6 justify-center items-center lg:items-start">
+      <div className="absolute inset-0 flex flex-row justify-between items-start m-5 md:m-10 lg:mx-25 lg:mt-40">
+        <div className="w-full text-center lg:text-left flex flex-col gap-4 md:gap-6 justify-center items-center lg:items-start">
           <div className="bg-[#01344a] rounded-full p-1 px-6">
             <p className="font-bold text-teal-400">
               Smarter Fitness. Healthier You.
@@ -74,12 +74,12 @@ const HomeSection = () => {
           </div>
 
           <div className="flex flex-col gap-3">
-            <p className="text-5xl md:text-6xl text-white font-extrabold">
+            <p className="text-4xl md:text-6xl text-white font-extrabold">
               Your Fitness <br></br> Journey,{" "}
               <span className="text-teal-500">Smarter.</span>
             </p>
-            <p className="font-medium text-neutral-400">
-              Track your workouts, analyze your progress, and get <br></br> AI
+            <p className="text-sm md:text-base font-medium pt-4 md:pt-0 text-neutral-400">
+              Track your workouts, analyze your progress, and get <br className="hidden md:block"></br> AI
               powered recommendations all in one place.
             </p>
           </div>
@@ -87,19 +87,19 @@ const HomeSection = () => {
           <div className="w-full flex flex-row gap-5">
             <button
               onClick={() => router.push("/auth")}
-              className="w-full shadow-[0_0_0_3px_#000000_inset] px-8 py-3 bg-teal-400 border border-teal-500 text-black rounded-full font-bold transform hover:-translate-y-1 transition duration-400"
+              className="w-full text-xs md:text-base shadow-[0_0_0_3px_#000000_inset] p-2 md:px-8 md:py-3 bg-teal-400 border border-teal-500 text-black rounded-full font-bold transform hover:-translate-y-1 transition duration-400"
             >
               Get Started <ArrowRightOutlined />
             </button>
             <button
               onClick={() => router.push("#features")}
-              className="w-full shadow-[0_0_0_3px_#000000_inset] px-8 py-3 bg-transparent outline-2 outline-teal-500 text-teal-300 rounded-full font-bold transform hover:-translate-y-1 transition duration-400"
+              className="w-full text-xs md:text-base shadow-[0_0_0_3px_#000000_inset] p-2 md:px-8 md:py-3 bg-transparent outline-2 outline-teal-500 text-teal-300 rounded-full font-bold transform hover:-translate-y-1 transition duration-400"
             >
               Explore Features
             </button>
           </div>
 
-          <div className="flex flex-col md:flex-row gap-6">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-6">
             <div className="flex flex-row items-center gap-2">
               <SignalFilled
                 style={{ color: "#2dd4bf" }}

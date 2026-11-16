@@ -30,7 +30,7 @@ export default function Home() {
 
         <div className="w-full text-center lg:text-left flex flex-col items-center lg:items-start gap-10">
           <p className="text-teal-500 uppercase font-medium">Your Dashboard</p>
-          <p className="text-5xl md:text-6xl text-white font-extrabold">
+          <p className="text-4xl md:text-6xl text-white font-extrabold">
             See Your Progress in Real Time
           </p>
           <p className="text-neutral-400">

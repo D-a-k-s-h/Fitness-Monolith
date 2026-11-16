@@ -13,6 +13,7 @@ type AppRouter = ReturnType<typeof useRouter>;
 export function login(email: string, password: string, router: AppRouter) {
   return async (dispatch: AppDispatch) => {
     const toastId = toast.loading("Authenticating...");
+    const toastId2 = toast.loading("First request might take a minute....");
     try {
       const response = await apiConnector("POST", LOGIN_API, {
         email,
@@ -28,7 +29,7 @@ export function login(email: string, password: string, router: AppRouter) {
       Cookies.set("access_token", response?.data?.token, {
         expires: 2, //TWO DAYS EXPIRY
         secure: process.env.NODE_ENV === "production",
-        sameSite: "strict"
+        sameSite: "strict",
       });
 
       Cookies.set("authData", JSON.stringify(response?.data?.user));
@@ -44,6 +45,7 @@ export function login(email: string, password: string, router: AppRouter) {
       console.log(error);
     } finally {
       toast.dismiss(toastId);
+      toast.dismiss(toastId2);
     }
   };
 }
@@ -56,6 +58,7 @@ export function register(
 ) {
   return async (dispatch: AppDispatch) => {
     const toastId = toast.loading("Authenticating...");
+    const toastId2 = toast.loading("First request might take a minute....");
     try {
       const response = await apiConnector("POST", SIGNUP_API, {
         firstName,
@@ -79,6 +82,7 @@ export function register(
       console.error(error);
     } finally {
       toast.dismiss(toastId);
+      toast.dismiss(toastId2);
     }
   };
 }
