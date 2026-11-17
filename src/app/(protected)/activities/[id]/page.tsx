@@ -208,18 +208,18 @@ const Page = () => {
                   <MdOutlineSignalCellularAlt className="text-primary text-3xl" />
                 </div>
                 <p className="text-neutral-200 text-xl font-medium">
-                  Addtitional Metrics
+                  Additional Metrics
                 </p>
               </div>
 
               {activityData ? (
                 <Flex
                   gap={"large"}
-                  className="w-full flex flex-col items-center md:flex-row justify-around"
+                  className="w-full flex flex-col md:flex-row items-center justify-around"
                 >
                   {entries.reverse().map(([name, value], index) => (
                     <React.Fragment key={index}>
-                      <div className="flex flex-col gap-4 capitalize">
+                      <div className="w-full md:w-fit text-center md:text-start flex flex-col gap-4 capitalize">
                         <p className="text-neutral-400 font-normal text-lg">
                           {formatMetricName(name)}
                         </p>

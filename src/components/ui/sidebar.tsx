@@ -114,7 +114,7 @@ export const MobileSidebar = ({
   const { open, setOpen } = useSidebar();
   return (
     <div
-      className="h-10 px-4 py-4 flex flex-row md:hidden items-center justify-between bg-navy-800 w-full"
+      className="h-10 px-4 py-4 flex flex-row md:hidden items-center justify-between bg-navy-900 w-full"
       {...props}
     >
       <div className="flex justify-end z-20 w-full">
@@ -130,7 +130,7 @@ export const MobileSidebar = ({
       {open && (
         <div
           className={cn(
-            "fixed h-full w-full inset-0 bg-navy-800 p-10 z-100 flex flex-col justify-between",
+            "fixed h-full w-full inset-0 bg-navy-900 p-10 z-100 flex flex-col justify-between",
             className,
           )}
         >
