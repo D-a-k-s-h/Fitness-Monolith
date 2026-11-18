@@ -142,7 +142,7 @@ const LogActivity = ({ onActivitySaved }: { onActivitySaved?: () => void }) => {
           />
         </Form.Item>
 
-        <div className="w-full flex flex-row gap-2">
+        <div className="w-full flex flex-col md:flex-row md:gap-2">
           <Form.Item
             label="Start Date"
             name={"startTime"}
@@ -151,6 +151,7 @@ const LogActivity = ({ onActivitySaved }: { onActivitySaved?: () => void }) => {
           >
             <DatePicker
               showTime
+              classNames={{ popup: { root: "activity-date-picker-popup" } }}
               style={{
                 width: "100%",
               }}
@@ -164,6 +165,7 @@ const LogActivity = ({ onActivitySaved }: { onActivitySaved?: () => void }) => {
           >
             <DatePicker
               showTime
+              classNames={{ popup: { root: "activity-date-picker-popup" } }}
               style={{
                 width: "100%",
               }}

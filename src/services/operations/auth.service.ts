@@ -12,8 +12,23 @@ type AppRouter = ReturnType<typeof useRouter>;
 
 export function login(email: string, password: string, router: AppRouter) {
   return async (dispatch: AppDispatch) => {
-    const toastId = toast.loading("Authenticating...");
-    const toastId2 = toast.loading("First request might take a minute....");
+    const countdownDuration = 156;
+    let secondsRemaining = countdownDuration;
+    const toastId = toast.loading(`Authenticating... ${secondsRemaining}s remaining`);
+    const countdownInterval = setInterval(() => {
+      secondsRemaining -= 1;
+
+      if (secondsRemaining === 0) {
+        clearInterval(countdownInterval);
+        toast.loading("Still waiting for the server...", { id: toastId });
+        return;
+      }
+
+      toast.loading(`Authenticating... ${secondsRemaining}s remaining`, {
+        id: toastId,
+      });
+    }, 1000);
+
     try {
       const response = await apiConnector("POST", LOGIN_API, {
         email,
@@ -44,8 +59,8 @@ export function login(email: string, password: string, router: AppRouter) {
       );
       console.log(error);
     } finally {
+      clearInterval(countdownInterval);
       toast.dismiss(toastId);
-      toast.dismiss(toastId2);
     }
   };
 }
@@ -57,8 +72,25 @@ export function register(
   lastName?: string,
 ) {
   return async (dispatch: AppDispatch) => {
-    const toastId = toast.loading("Authenticating...");
-    const toastId2 = toast.loading("First request might take a minute....");
+    const countdownDuration = 156;
+    let secondsRemaining = countdownDuration;
+    const toastId = toast.loading(
+      `Registering... ${secondsRemaining}s remaining`,
+    );
+    const countdownInterval = setInterval(() => {
+      secondsRemaining -= 1;
+
+      if (secondsRemaining === 0) {
+        clearInterval(countdownInterval);
+        toast.loading("Still waiting for the server...", { id: toastId });
+        return;
+      }
+
+      toast.loading(`Registering... ${secondsRemaining}s remaining`, {
+        id: toastId,
+      });
+    }, 1000);
+    
     try {
       const response = await apiConnector("POST", SIGNUP_API, {
         firstName,
@@ -81,8 +113,8 @@ export function register(
       );
       console.error(error);
     } finally {
+      clearInterval(countdownInterval);
       toast.dismiss(toastId);
-      toast.dismiss(toastId2);
     }
   };
 }
