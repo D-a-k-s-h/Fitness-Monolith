@@ -5,6 +5,7 @@ import type { AppDispatch } from "@/redux/store";
 import { setAuthData, setIsSignUp, setToken } from "@/slices/authSlice";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import axios from "axios";
 
 const { LOGIN_API, SIGNUP_API } = authEndpoint;
 
@@ -14,7 +15,9 @@ export function login(email: string, password: string, router: AppRouter) {
   return async (dispatch: AppDispatch) => {
     const countdownDuration = 156;
     let secondsRemaining = countdownDuration;
-    const toastId = toast.loading(`Authenticating... ${secondsRemaining}s remaining`);
+    const toastId = toast.loading(
+      `Authenticating... ${secondsRemaining}s remaining`,
+    );
     const countdownInterval = setInterval(() => {
       secondsRemaining -= 1;
 
@@ -49,13 +52,15 @@ export function login(email: string, password: string, router: AppRouter) {
 
       Cookies.set("authData", JSON.stringify(response?.data?.user));
 
-      toast.success("Authenticated");
+      toast.success(response?.data?.message ?? "Check!");
       dispatch(setToken(response?.data?.token));
       dispatch(setAuthData(response?.data?.user));
       router.replace("/dashboard");
     } catch (error) {
       toast.error(
-        error instanceof Error ? error?.message : "Authentication failed",
+        axios.isAxiosError(error)
+          ? (error?.response?.data?.message ?? error?.message)
+          : "Authentication failed",
       );
       console.log(error);
     } finally {
@@ -90,7 +95,7 @@ export function register(
         id: toastId,
       });
     }, 1000);
-    
+
     try {
       const response = await apiConnector("POST", SIGNUP_API, {
         firstName,
@@ -109,7 +114,9 @@ export function register(
       dispatch(setIsSignUp(false));
     } catch (error) {
       toast.error(
-        error instanceof Error ? error.message : "Authentication failed",
+        axios.isAxiosError(error)
+          ? (error?.response?.data?.message ?? error?.message)
+          : "Registration Failed!",
       );
       console.error(error);
     } finally {

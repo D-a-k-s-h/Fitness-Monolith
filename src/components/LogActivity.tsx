@@ -15,13 +15,14 @@ import {
   Select,
   Space,
 } from "antd";
+import type { Dayjs } from "dayjs";
 import React, { useState } from "react";
 
 interface FieldType {
   activityType: string;
   duration: number;
-  startTime: string;
-  endTime: string;
+  startTime: Dayjs;
+  endTime: Dayjs;
   calories: number;
   additionalMetrics: { metric: string; value: string }[];
 }
@@ -61,11 +62,15 @@ const LogActivity = ({ onActivitySaved }: { onActivitySaved?: () => void }) => {
         ],
       ),
     );
+    const startTime = values.startTime.format("YYYY-MM-DDTHH:mm:ss");
+    const endTime = values.endTime.format("YYYY-MM-DDTHH:mm:ss");
 
     console.log({
       ...values,
       additionalMetrics,
-      authData
+      startTime,
+      endTime,
+      authData,
     });
 
     dispatch(
@@ -74,8 +79,8 @@ const LogActivity = ({ onActivitySaved }: { onActivitySaved?: () => void }) => {
         additionalMetrics,
         values?.duration,
         values?.calories,
-        values?.startTime,
-        values?.endTime,
+        startTime,
+        endTime,
         authData?.id,
       ),
     )

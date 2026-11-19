@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import { recommendationEndpoint } from "../apis";
+import axios from "axios";
 
 const { GET_USER_RECOMMENDATION, GET_ACTIVITY_RECOMMENDATION } =
   recommendationEndpoint;
@@ -21,7 +22,11 @@ export function getUserRecommendations(userId: string) {
 
       result = response;
     } catch (error) {
-      toast.error(error instanceof Error ? error?.message : "Fetch Failed");
+      toast.error(
+        axios.isAxiosError(error)
+          ? (error?.response?.data?.message ?? error?.message)
+          : "Fetch Failed!",
+      );
       console.log(error);
     }
     toast.dismiss(toastId);
@@ -46,7 +51,11 @@ export function getActivityRecommendations(activityId: string | undefined) {
       toast.dismiss(toastId);
       return { success: true, data: response.data };
     } catch (error) {
-      toast.error(error instanceof Error ? error?.message : "Fetch Failed");
+      toast.error(
+        axios.isAxiosError(error)
+          ? (error?.response?.data?.message ?? error?.message)
+          : "Fetch Failed!",
+      );
       console.log(error);
       toast.dismiss(toastId);
       return { success: false };

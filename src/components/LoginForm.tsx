@@ -188,6 +188,9 @@ const LoginForm = () => {
                 />
               </ConfigProvider>
             </div>
+            <p className="text-neutral-500 text-xs">
+              Test email: john@gmail.com
+            </p>
           </div>
 
           <div className="flex flex-col gap-1">
@@ -226,6 +229,7 @@ const LoginForm = () => {
                 />
               </ConfigProvider>
             </div>
+            <p className="text-neutral-500 text-xs">Test Password: John123</p>
           </div>
 
           {isSignUp && (

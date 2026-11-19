@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import { userEndpoint } from "../apis";
+import axios from "axios";
 
 const { UPDATE_PROFILE, DELETE_PROFILE, FETCH_PROFILE } = userEndpoint;
 
@@ -18,6 +19,11 @@ export function fetchProfile(id: string | undefined) {
       toast.dismiss(toastId);
       return { success: true, data: response?.data };
     } catch (error) {
+      toast.error(
+        axios.isAxiosError(error)
+          ? (error?.response?.data?.message ?? error?.message)
+          : "Fetch Failed!",
+      );
       console.log(error);
       toast.dismiss(toastId);
       return { success: false };
@@ -51,6 +57,11 @@ export function updateProfile(
       toast.dismiss(toastId);
       return { success: true };
     } catch (error) {
+      toast.error(
+        axios.isAxiosError(error)
+          ? (error?.response?.data?.message ?? error?.message)
+          : "Update Failed!",
+      );
       console.log(error);
       toast.dismiss(toastId);
       return { success: false };
@@ -72,6 +83,11 @@ export function deleteProfile(id: string | undefined) {
       toast.dismiss(toastId);
       return { success: true };
     } catch (error) {
+      toast.error(
+        axios.isAxiosError(error)
+          ? (error?.response?.data?.message ?? error?.message)
+          : "Deletion Failed!",
+      );
       console.log(error);
       toast.dismiss(toastId);
       return { success: false };

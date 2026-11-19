@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import { activityEndpoint } from "../apis";
+import axios from "axios";
 
 const { GET_ACTIVITIES, SAVE_ACTIVITY, DELETE_ACTIVITY, GET_ACTIVITY } =
   activityEndpoint;
@@ -20,7 +21,11 @@ export function getActivities(userId: string) {
 
       result = response;
     } catch (error) {
-      toast.error(error instanceof Error ? error?.message : "Fetch Failed");
+      toast.error(
+        axios.isAxiosError(error)
+          ? (error?.response?.data?.message ?? error?.message)
+          : "Fetch Failed",
+      );
       console.log(error);
     }
     //toast.dismiss(toastId);
@@ -60,7 +65,11 @@ export function saveActivity(
       toast.dismiss(toastId2);
       return { success: true, data: response.data };
     } catch (error) {
-      toast.error(error instanceof Error ? error?.message : "Fetch Failed");
+      toast.error(
+        axios.isAxiosError(error)
+          ? (error?.response?.data?.message ?? error?.message)
+          : "Save Failed!",
+      );
       console.log(error);
       toast.dismiss(toastId);
       toast.dismiss(toastId2);
@@ -86,7 +95,11 @@ export function deleteActivity(activityId: string) {
       toast.dismiss(toastId);
       return { success: true };
     } catch (error) {
-      toast.error(error instanceof Error ? error?.message : "Fetch Failed");
+      toast.error(
+        axios.isAxiosError(error)
+          ? (error?.response?.data?.message ?? error?.message)
+          : "Deletion Failed!",
+      );
       console.log(error);
       toast.dismiss(toastId);
       return { success: false };
@@ -111,7 +124,11 @@ export function getActivityData(activityId: string | undefined) {
       toast.dismiss(toastId);
       return { success: true, data: response.data };
     } catch (error) {
-      toast.error(error instanceof Error ? error?.message : "Fetch Failed");
+      toast.error(
+        axios.isAxiosError(error)
+          ? (error?.response?.data?.message ?? error?.message)
+          : "Fetch Failed!",
+      );
       console.log(error);
       toast.dismiss(toastId);
       return { success: false };
